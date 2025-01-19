@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row vh-100 align-items-center">
+        <div class="col-md-6 text-center">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h1 class="card-title mb-5">Рестораны</h1>
+                    <p class="card-text mb-5">Найдите лучшие рестораны и оставьте свой отзыв</p>
+                    <a href="{% url 'restaurant_list' %}" class="btn btn-primary btn-lg py-3">Перейти к ресторанам</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-center">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h1 class="card-title mb-5">Вина</h1>
+                    <p class="card-text mb-5">Откройте для себя лучшие вина и поделитесь впечатлениями</p>
+                    <a href="{% url 'wine_list' %}" class="btn btn-primary btn-lg py-3">Перейти к винам</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

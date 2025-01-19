@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ restaurant.name }}</h1>
+            {% if restaurant.address %}
+            <p><strong>Адрес:</strong> {{ restaurant.address }}</p>
+            {% endif %}
+            {% if restaurant.image %}
+            <img src="{{ restaurant.image.url }}" class="img-fluid mb-3" alt="{{ restaurant.name }}">
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3>Отзывы</h3>
+            <a href="{% url 'add_review' %}" class="btn btn-primary mb-3">Добавить отзыв</a>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Имя</th>
+                        <th>Блюдо</th>
+                        <th>Оценка</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for review in reviews %}
+                    <tr>
+                        <td>{{ review.created_at|date:"d.m.Y H:i" }}</td>
+                        <td>{{ review.reviewer_name }}</td>
+                        <td>{{ review.dish }}</td>
+                        <td>{{ review.rating }}/10</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">Пока нет отзывов. Будьте первым!</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

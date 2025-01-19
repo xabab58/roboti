@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <h1>Вина</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Фильтры</h5>
+                    <form method="get" class="row">
+                        <div class="col-md-3">
+                            {{ filter_form.country|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ filter_form.wine_type|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{ filter_form.sweetness|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary">Применить</button>
+                            <a href="{% url 'wine_list' %}" class="btn btn-secondary ms-2">Сбросить</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for wine in wines %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if wine.image %}
+                <img src="{{ wine.image.url }}" class="card-img-top" alt="{{ wine.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ wine.name }}</h5>
+                    <p class="card-text">
+                        <strong>Страна:</strong> {{ wine.get_country_display }}<br>
+                        <strong>Тип:</strong> {{ wine.get_wine_type_display }}<br>
+                        <strong>Сладость:</strong> {{ wine.get_sweetness_display }}
+                    </p>
+                    <a href="{% url 'wine_detail' wine.pk %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>Вина не найдены.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 
