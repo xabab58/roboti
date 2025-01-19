@@ -63,12 +63,14 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# Настройки статических файлов
+STATIC_URL = os.getenv('STATIC_URL', '/static/')
+STATIC_ROOT = os.getenv('STATIC_ROOT', BASE_DIR / 'staticfiles')
+STATICFILES_DIRS = []  # Убираем STATICFILES_DIRS, так как у нас нет статических файлов в проекте
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# Настройки медиа файлов
+MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', BASE_DIR / 'media')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
