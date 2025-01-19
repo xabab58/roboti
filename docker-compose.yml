@@ -8,12 +8,15 @@ services:
     volumes:
       - .:/app
       - media_volume:/app/media
+      - static_volume:/app/staticfiles
     environment:
       - DEBUG=1
       - SECRET_KEY=your-secret-key-here
     command: >
       bash -c "python manage.py migrate &&
+               python manage.py collectstatic --noinput &&
                python manage.py runserver 0.0.0.0:8000"
 
 volumes:
-  media_volume: 
+  media_volume:
+  static_volume: 

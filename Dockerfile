@@ -11,14 +11,14 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем проект
 COPY . .
 
-# Создаем директорию для медиафайлов
-RUN mkdir -p media
-
-# Собираем статические файлы
-RUN python manage.py collectstatic --noinput
+# Создаем необходимые директории
+RUN mkdir -p media static staticfiles
 
 # Создаем .env файл с секретным ключом
 RUN echo "SECRET_KEY=django-insecure-your-secret-key-here" > .env
+
+# Собираем статические файлы
+RUN python manage.py collectstatic --noinput
 
 # Выполняем миграции и создаем суперпользователя
 RUN python manage.py makemigrations && \
@@ -27,6 +27,9 @@ RUN python manage.py makemigrations && \
 
 # Открываем порт
 EXPOSE 8000
+
+# Устанавливаем переменные окружения
+ENV DEBUG=1
 
 # Запускаем сервер
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"] 
