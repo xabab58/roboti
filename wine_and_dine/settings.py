@@ -65,17 +65,15 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # Настройки статических файлов
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
-
-# Получаем путь для статики и медиа из переменных окружения
-STATIC_ROOT = os.getenv('STATIC_ROOT', str(BASE_DIR / 'staticfiles'))
+STATIC_ROOT = os.getenv('STATIC_ROOT', str(BASE_DIR / 'staticfiles'))  # Путь к статике
 
 # Настройки медиа файлов
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 MEDIA_ROOT = os.getenv('MEDIA_ROOT', str(BASE_DIR / 'media'))
 
-# Дополнительные директории для статики, если они есть
+# Дополнительные директории для статики
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Убедитесь, что папка существует
+    BASE_DIR / 'static',  # Убедитесь, что эта папка существует в вашем проекте
 ]
 
 LOGIN_REDIRECT_URL = 'home'
