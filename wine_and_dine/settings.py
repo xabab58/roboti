@@ -65,11 +65,18 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 # Настройки статических файлов
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
-STATIC_ROOT = os.getenv('STATIC_ROOT', BASE_DIR / 'staticfiles')
+
+# Получаем путь для статики и медиа из переменных окружения
+STATIC_ROOT = os.getenv('STATIC_ROOT', str(BASE_DIR / 'staticfiles'))
 
 # Настройки медиа файлов
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
-MEDIA_ROOT = os.getenv('MEDIA_ROOT', BASE_DIR / 'media')
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', str(BASE_DIR / 'media'))
+
+# Дополнительные директории для статики, если они есть
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Убедитесь, что папка существует
+]
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
@@ -78,4 +85,4 @@ LOGIN_URL = 'login'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField' 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
