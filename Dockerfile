@@ -8,18 +8,17 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Создаем необходимые директории
-RUN mkdir -p media static staticfiles
-
-# Создаем .env файл с секретным ключом
-RUN echo "SECRET_KEY=django-insecure-your-secret-key-here" > .env
-
 # Устанавливаем переменные окружения
 ENV DEBUG=1
+ENV DJANGO_SETTINGS_MODULE=wine_and_dine.settings
+ENV SECRET_KEY=django-insecure-your-secret-key-here
 ENV STATIC_ROOT=/app/staticfiles
 ENV STATIC_URL=/static/
 ENV MEDIA_ROOT=/app/media
 ENV MEDIA_URL=/media/
+
+# Создаем необходимые директории
+RUN mkdir -p media staticfiles
 
 # Копируем проект
 COPY . .

@@ -66,7 +66,6 @@ AUTH_USER_MODEL = 'users.CustomUser'
 # Настройки статических файлов
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
 STATIC_ROOT = os.getenv('STATIC_ROOT', BASE_DIR / 'staticfiles')
-STATICFILES_DIRS = []  # Убираем STATICFILES_DIRS, так как у нас нет статических файлов в проекте
 
 # Настройки медиа файлов
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
